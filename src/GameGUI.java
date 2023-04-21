@@ -90,33 +90,35 @@ public class GameGUI{
             // Action listener for money input
             @Override
             public void actionPerformed(ActionEvent e) {
-                rpCount = 0;
-                CardDeck deck = new CardDeck();
-                CardDeck.shuffle();
-                player.drawCards();
-                dealer.drawCards();
-
                 bettingMoney = Integer.parseInt(txt_inputbet.getText());
-                player.placeBet(bettingMoney);
+                if(bettingMoney <= player.getMoneyInHand()) {
+                    rpCount = 0;
+                    CardDeck deck = new CardDeck();
+                    CardDeck.shuffle();
+                    player.drawCards();
+                    dealer.drawCards();
 
-                ImageIcon flipC1 = new ImageIcon(String.format("Images/card_" + player.getCard(0) + ".gif"));
-                ImageIcon flipC2 = new ImageIcon(String.format("Images/card_" + player.getCard(1) + ".gif"));
-                ImageIcon flipC3 = new ImageIcon(String.format("Images/card_" + player.getCard(2) + ".gif"));
+                    player.placeBet(bettingMoney);
 
-                label_info.setText(String.format("Your current bet is $"+bettingMoney+
-                        " Amount of money you have: $"+(bettingMoney+ player.getMoneyInHand())));
-                playerImages.get(0).setIcon(flipC1);
-                playerImages.get(1).setIcon(flipC2);
-                playerImages.get(2).setIcon(flipC3);
+                    ImageIcon flipC1 = new ImageIcon(String.format("Images/card_" + player.getCard(0) + ".gif"));
+                    ImageIcon flipC2 = new ImageIcon(String.format("Images/card_" + player.getCard(1) + ".gif"));
+                    ImageIcon flipC3 = new ImageIcon(String.format("Images/card_" + player.getCard(2) + ".gif"));
 
-                ButtonPanel.repaint();
-                PlayerPanel.repaint();
+                    label_info.setText(String.format("Your current bet is $" + bettingMoney +
+                            " Amount of money you have: $" + (bettingMoney + player.getMoneyInHand())));
+                    playerImages.get(0).setIcon(flipC1);
+                    playerImages.get(1).setIcon(flipC2);
+                    playerImages.get(2).setIcon(flipC3);
 
-                btn_Result.setEnabled(true);
-                btn_rpcard1.setEnabled(true);
-                btn_rpcard2.setEnabled(true);
-                btn_rpcard3.setEnabled(true);
-                btn_start.setEnabled(false);
+                    ButtonPanel.repaint();
+                    PlayerPanel.repaint();
+
+                    btn_Result.setEnabled(true);
+                    btn_rpcard1.setEnabled(true);
+                    btn_rpcard2.setEnabled(true);
+                    btn_rpcard3.setEnabled(true);
+                    btn_start.setEnabled(false);
+                }
             }
         });
         btn_Result.addActionListener(new ActionListener() {
