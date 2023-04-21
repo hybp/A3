@@ -5,9 +5,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This is the GUI class.
+ **/
 public class GameGUI{
     int bettingMoney = 0;
     int rpCount = 0;
+
+    /**
+     * This is the go method for GUI. It will take care of interactions with the user, determine the winner,
+     * visual design of the game, behavior of game components as game progresses, and ending the game.
+     *
+     * @param player takes the player object from CardGame class as input.
+     * @param dealer takes the dealer object from CardGame class as input.
+     */
     public void go(Player player, Dealer dealer) {
         JFrame frame = new JFrame();
         frame.setSize(400, 700);
@@ -86,7 +97,14 @@ public class GameGUI{
         InfoPanel.add(label_info);
 
         // Action Listeners for buttons
+
         btn_start.addActionListener(new ActionListener() {
+            /**
+             * Inner class for start button action listener.
+             * As a side note for the file names of card image files, they have been optimized.
+             * for more efficient program design. Still carries out the required functionality.
+             * @param e start button click event.
+             */
             // Action listener for money input
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +140,10 @@ public class GameGUI{
             }
         });
         btn_Result.addActionListener(new ActionListener() {
+            /**
+             * Inner class for result button action listener.
+             * @param e the event to be processed from result button.
+             */
             // Action listener for money input
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -166,6 +188,10 @@ public class GameGUI{
             }
         });
         btn_rpcard1.addActionListener(new ActionListener() {
+            /**
+             * Inner class for the replace card button. Similar for all other replacement buttons.
+             * @param e the event to be processed from replace card button.
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (rpCount < 2) {
@@ -236,6 +262,13 @@ public class GameGUI{
 
         frame.getContentPane().add(MainPanel);
     }
+
+    /**
+     * This method determines the winner of the game with current deck.
+     * @param player
+     * @param dealer
+     * @return true if player won, false if the dealer won.
+     */
     private Boolean playerWon(Player player, Dealer dealer) {
         int dealerPt = 0;
         int playerPt = 0;
